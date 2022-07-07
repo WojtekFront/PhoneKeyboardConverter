@@ -1,0 +1,9 @@
+weryfikacja:
+1. sprawdzamy co dostajemy i czy jest to tablica;
+2. sprawdzamy czy tablica jest pusta
+3. weryfikujemy pierwszy znak tablicy czy jest to nr lub litera plus spacja lub przecinek
+4. jeżeli jest numer to sprawdzamy czy wszystkie znaki są numerami i analogicznie do litery plus spacja przecinek
+
+tłumaczenie:
+1. zlecamy tłumaczenie cyfr na znaki
+2. zlecamy tłumaczenie znaków na cyfry i drukujemy komunikat
