@@ -1,0 +1,22 @@
+weryfikacja:
+1. sprawdzamy co dostajemy i czy jest to tablica;
+2. sprawdzamy czy tablica jest pusta
+3. weryfikujemy pierwszy znak tablicy czy jest to nr lub litera plus spacja lub przecinek
+4. jeżeli jest numer to sprawdzamy czy wszystkie znaki są numerami i analogicznie do litery plus spacja przecinek
+5. if the characters are the same then check long. divers by 3 and take last part
+
+tłumaczenie:
+1. zlecamy tłumaczenie cyfr na znaki
+2. zlecamy tłumaczenie znaków na cyfry i drukujemy komunikat
+
+dodatkowe:
+1. tłumaczenie komunikatu błędów
+
+
+
+
+testing array:
+1. empty,
+2. wrong type character $,%.";
+3. wrong value: 12, cce, c1;
+4. corrrect anwear
