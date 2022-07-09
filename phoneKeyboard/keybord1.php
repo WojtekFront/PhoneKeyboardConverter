@@ -4,35 +4,30 @@ class PhoneKeyboardConverter
 {
 
 
-    public $convert = [
-        1 => "a", 11 => "b", 111 => "c",
-        2 => "d", 22 => "e", 22 => "f",
-        3 => "g", 33 => "h", 333 => "i",
-        4 => "j", 44 => "k", 444 => "l",
-        5 => "m", 55 => "n", 555 => "o",
-        6 => "p", 66 => "q", 666 => "r",
-        7 => "s", 77 => "t", 777 => "u",
-        8 => "v", 88 => "w", 888 => "x",
-        9 => "y", 99 => "z", 999 => ".",
-        0 => " ", 00 => "+", 000 => "*"
-    ];
+   
+
     public function getValue($enteredValue)
     {
 
         if (!isset($enteredValue) || !$enteredValue) { //check exist or not empty
-            header("location:../index.php?error=empty value");
+            header("location:../index.php?error=emptyValue");
             exit();
-        } elseif (is_array($enteredValue)) { // if is array then send to "check first character"
-            $this->verificationFirstCharacter($enteredValue);
-        } elseif (is_int($enteredValue)) { // if is numeric then send to convertToString()
-            $this->verificationIntiger($enteredValue);
-        } elseif (is_string($enteredValue)) { // if is string check if contains "," if not send to convertToNumeric()
+        } elseif (is_string($enteredValue)) { // if is string //check if contains "," if not send to convertToNumeric()
             // maybe string contain wrong character then stop. 
-            
+
             $result = explode(",", $enteredValue);
             $this->verificationFirstCharacter($result);
-        } else { // "invalid value"
-
+        
+        
+        } 
+        // elseif (is_array($enteredValue)) { // if is array // then send to "check first character"
+        //     $this->verificationFirstCharacter($enteredValue);
+        // } elseif (is_int($enteredValue)) { // if is numeric // then send to convertToString()
+        //     $this->verificationIntiger($enteredValue);
+        // }
+         else { // "invalid value"
+            header("location:../index.php?error=invalidValue");
+            exit();
         }
     }
 
@@ -46,8 +41,7 @@ class PhoneKeyboardConverter
 
     private function verificationFirstCharacter($enteredValue) //here you should take from array the first letter from the zero element
     {
-        $firstWord =$enteredValue[0];
-        
+        $firstWord = $enteredValue[0];
     }
 
     private function verificationIntiger()
