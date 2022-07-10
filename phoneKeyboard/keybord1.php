@@ -2,61 +2,103 @@
 
 class PhoneKeyboardConverter
 {
+    function __construct($enteredValue)
+    {
+        $this->enteredValue = $enteredValue;
+    }
+    public $convert = [
+        "a" => "2", "b" => "22", "c" => "222",
+        "d" => "3", "e" => "33", "f" => "333",
+        "g" => "4", "h" => "44", "i" => "444",
+        "j" => "5", "k" => "55", "l" => "555",
+        "m" => "6", "n" => "66", "o" => "666",
+        "p" => "7", "q" => "77", "r" => "777", "s" => "7777",
+        "t" => "8", "u" => "88", "v" => "888",
+        "w" => "9", "x" => "99", "y" => "999", "z" => "9999",
+        " " => "0"
+    ];
 
-
-   
+    public $returnedValue = "";
 
     public function getValue($enteredValue)
     {
 
         if (!isset($enteredValue) || !$enteredValue) { //check exist or not empty
-            header("location:../index.php?error=emptyValue");
-            exit();
-        } elseif (is_string($enteredValue)) { // if is string //check if contains "," if not send to convertToNumeric()
-            // maybe string contain wrong character then stop. 
-
-            $result = explode(",", $enteredValue);
-            $this->verificationFirstCharacter($result);
-        
-        
-        } 
+            return "brak danych";
+        } elseif (is_string($enteredValue)) {
+            return $this->verificationFirstCharacter($enteredValue);
+        }
         // elseif (is_array($enteredValue)) { // if is array // then send to "check first character"
         //     $this->verificationFirstCharacter($enteredValue);
         // } elseif (is_int($enteredValue)) { // if is numeric // then send to convertToString()
         //     $this->verificationIntiger($enteredValue);
         // }
-         else { // "invalid value"
+        else { // "invalid value"
             header("location:../index.php?error=invalidValue");
             exit();
         }
     }
 
-    private function convertToNumeric()
-    {
+    function verificationFirstCharacter($enternedArray) // here we check the first character in the array
+    { 
+        $firstCharacter = substr($enternedArray, 0, 1);
+        return $this->assignToArray($firstCharacter, $enternedArray);
     }
 
-    private function convertToString()
+    function assignToArray($firstCharacterNew, $enternedArray)
     {
+        if (is_numeric($firstCharacterNew)) {
+            $numericValue = $this->convertToString($enternedArray);
+            return $numericValue;
+        } elseif (preg_match("/[a-zA-Z\s]/", $firstCharacterNew)) {
+            $stringValue = $this->convertToNumeric($enternedArray);
+            return $stringValue;      
+        } else {
+            return "niepoprawna wartość";
+        }
     }
 
-    private function verificationFirstCharacter($enteredValue) //here you should take from array the first letter from the zero element
+    function convertToString($enternedArray) //change number na string
     {
-        $firstWord = $enteredValue[0];
+        $convert =$this-> convert; 
+        $returnedValue =$this-> returnedValue;
+        $enternedArray = explode(",", $enternedArray);
+        for ($n = 0; count($enternedArray) > $n; $n++) {
+            foreach ($convert as $keyEnternedArrayWord => $enternedArrayWord) {
+                if ($enternedArrayWord == $enternedArray[$n]) {
+                    $returnedValue = $returnedValue . $keyEnternedArrayWord;
+                }
+            }
+        }
+        return $returnedValue;
     }
 
-    private function verificationIntiger()
-    {
+    function convertToNumeric($enternedArray) //change string to number
+    { 
+        $convert =$this-> convert; 
+        $returnedValue =$this-> returnedValue;
+        $enternedArray = str_split(strtolower($enternedArray));
+        for ($n = 0; (count($enternedArray)) > $n; $n++) {
+            if ($returnedValue != "") {
+                $returnedValue = $returnedValue . ",";
+            }
+            $returnedValue = $returnedValue . $convert[$enternedArray[$n]];
+        }
+        return $returnedValue;
     }
-
-    private function verificationString()
-    {
-    }
-    //check value empty - not goood, we want : string, number array
-
 }
 
-$tablicaDoZmianyNumery = [33, 22, 444, 444, 555];
-$tablicaDoZmianyTekst = ["w", "o", "r", "d"];
+$newSting = "\ala";
+$test = new PhoneKeyboardConverter($newSting);
+echo $test-> getValue($newSting);
+
+
+
+
+
+
+
+
 
 
 ?>
