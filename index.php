@@ -43,36 +43,44 @@
 
 
 
-    $enteredValue = "ala"; //value from API
-    $enteredValue = "22,666,22,2";
+    $enteredValue = " ala"; //value from API
+  // $enteredValue = "22,666,22,2";
     $returnedValue = "";   // value back to API
     $enternedArray = explode(",", $enteredValue);
-
-
-    if (false) {
-        foreach ($enternedArray as $enternedArrayWord) {
-            foreach ($enternedArrayLetter as $newValueFromConvert) {
-                $enternedArrayLetter = str_split($enternedArrayWord);
-                if ($returnedValue != "") {
-                    $returnedValue = $returnedValue . ",";
-                }
-                $returnedValue = $returnedValue . $convert[$newValueFromConvert];
-            }
+    function assignToArray($firstCharacterNew){
+       // var_dump($firstCharacterNew);
+        $patern ="";
+        echo "<br>";
+        if(preg_match( "/[0-9] /",$firstCharacterNew)){
+            echo "number 1";
+            return "number";
+        }elseif(preg_match( "/[a-zA-Z\s]/",$firstCharacterNew)){
+            echo "text";
+            return "text";
+        }else{
+            echo "error";
+            return $firstCharacterNew;
         }
-    } elseif (true) {
-
-        for ($n = 0; count($enternedArray) > $n; $n++) {
-            foreach ($convert as $keyEnternedArrayWord => $enternedArrayWord) {
-
-                if ($enternedArrayWord == $enternedArray[$n]) {
-                    $returnedValue = $returnedValue . $keyEnternedArrayWord;
-                }
-            }
-        }
-    } else {
-
-        $returnedValue = "error";
     }
+    
+
+    
+    function verificationFirstCharacter($enteredValue)
+    {
+       // global $returnedValue;
+        $firstCharacter=substr($enteredValue, 0,1);
+        // $returnedValue = $firstCharacter;
+        // return $returnedValue;
+       // echo $firstCharacter."<br>";
+       return assignToArray($firstCharacter);
+    }
+   
+    
+
+    
+    
+    
+    var_dump( verificationFirstCharacter($enteredValue));
 
 
     echo $returnedValue;
@@ -86,22 +94,7 @@
 
 
     <?php
-    $arrayx = array(
-        'fruit1' => 'apple',
-        'fruit2' => 'orange',
-        'fruit3' => 'grape',
-        'fruit4' => 'apple',
-        'fruit5' => 'apple'
-    );
 
-    // this cycle echoes all associative array
-    // key where value equals "apple"
-    while ($fruit_namex = current($arrayx)) {
-        if ($fruit_namex == 'apple') {
-            echo key($arrayx), "\n";
-        }
-        next($arrayx);
-    }
     ?>
 </body>
 

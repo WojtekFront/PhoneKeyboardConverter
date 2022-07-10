@@ -59,6 +59,32 @@ $tablicaDoZmianyNumery = [33, 22, 444, 444, 555];
 $tablicaDoZmianyTekst = ["w", "o", "r", "d"];
 
 
+if (false) {
+    foreach ($enternedArray as $enternedArrayWord) {
+        foreach ($enternedArrayLetter as $newValueFromConvert) {
+            $enternedArrayLetter = str_split($enternedArrayWord);
+            if ($returnedValue != "") {
+                $returnedValue = $returnedValue . ",";
+            }
+            $returnedValue = $returnedValue . $convert[$newValueFromConvert];
+        }
+    }
+} elseif (false) {
+
+    for ($n = 0; count($enternedArray) > $n; $n++) {
+        foreach ($convert as $keyEnternedArrayWord => $enternedArrayWord) {
+
+            if ($enternedArrayWord == $enternedArray[$n]) {
+                $returnedValue = $returnedValue . $keyEnternedArrayWord;
+            }
+        }
+    }
+} else {
+
+    $returnedValue = "error";
+}
+
+
 ?>
 <!-- weryfikacja:
 1. sprawdzamy co dostajemy i czy jest to tablica; //R
