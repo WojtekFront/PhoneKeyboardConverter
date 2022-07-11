@@ -15,7 +15,7 @@ class PhoneKeyboardConverter
         "p" => "7", "q" => "77", "r" => "777", "s" => "7777",
         "t" => "8", "u" => "88", "v" => "888",
         "w" => "9", "x" => "99", "y" => "999", "z" => "9999",
-        " " => "0"
+        " " => "0", "error" => "error"
     ];
 
     public $returnedValue = "";
@@ -64,6 +64,9 @@ class PhoneKeyboardConverter
         $returnedValue =$this-> returnedValue;
         $enternedArray = explode(",", $enternedArray);
         for ($n = 0; count($enternedArray) > $n; $n++) {
+            if(!is_numeric($enternedArray[$n])){
+                $enternedArray[$n] ="error";
+                           }
             foreach ($convert as $keyEnternedArrayWord => $enternedArrayWord) {
                 if ($enternedArrayWord == $enternedArray[$n]) {
                     $returnedValue = $returnedValue . $keyEnternedArrayWord;
@@ -82,13 +85,16 @@ class PhoneKeyboardConverter
             if ($returnedValue != "") {
                 $returnedValue = $returnedValue . ",";
             }
+            if(!preg_match("/[a-zA-Z\s]/", $enternedArray[$n])){
+ $enternedArray[$n] ="error";
+            }
             $returnedValue = $returnedValue . $convert[$enternedArray[$n]];
         }
         return $returnedValue;
     }
 }
 
-$newSting = "\ala";
+$newSting = "22,22";
 $test = new PhoneKeyboardConverter($newSting);
 echo $test-> getValue($newSting);
 

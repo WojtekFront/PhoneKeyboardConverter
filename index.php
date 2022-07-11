@@ -16,7 +16,7 @@
     include "phoneKeyboard/keybord1.php";
     ?>
     <br>-----------------</br>
-
+<script src="JS/welcomeUsers.js"></script>
 </body>
 
 </html>
