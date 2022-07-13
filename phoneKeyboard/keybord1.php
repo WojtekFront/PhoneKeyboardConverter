@@ -2,11 +2,8 @@
 
 class PhoneKeyboardConverter
 {
-    // function __construct($enteredValue)
-    // {
-    //     $this->enteredValue = $enteredValue;
-    // }
-    public $convert = [
+   
+    private $convert = [
         "a" => "2", "b" => "22", "c" => "222",
         "d" => "3", "e" => "33", "f" => "333",
         "g" => "4", "h" => "44", "i" => "444",
@@ -18,7 +15,7 @@ class PhoneKeyboardConverter
         " " => "0", "error" => "error"
     ];
 
-    public $returnedValue = "";
+    private $returnedValue = "";
 
     public function getValue($enteredValue) // takes the external data and starts the analysis
     {
@@ -38,13 +35,13 @@ class PhoneKeyboardConverter
         }
     }
 
-    function verificationFirstCharacter($enternedArray) // here we check the first character in the array
+    private function verificationFirstCharacter(string $enternedArray) // here we check the first character in the array
     {
         $firstCharacter = substr($enternedArray, 0, 1);
         return $this->assignToArray($firstCharacter, $enternedArray);
     }
 
-    function assignToArray($firstCharacterNew, $enternedArray) // based on the first character assigns to an array
+    private function assignToArray(string $firstCharacterNew, string $enternedArray) // based on the first character assigns to an array
     {
         if (is_numeric($firstCharacterNew)) {
             $numericValue = $this->convertToString($enternedArray);
@@ -57,7 +54,7 @@ class PhoneKeyboardConverter
         }
     }
 
-    function convertToString($enternedArray) //change number on string
+    private function convertToString(string $enternedArray) //change number on string
     {
         $convert = $this->convert;
         $returnedValue = $this->returnedValue;
@@ -75,7 +72,7 @@ class PhoneKeyboardConverter
         return $returnedValue;
     }
 
-    function convertToNumeric($enternedArray) //change string to number
+   private function convertToNumeric(string $enternedArray) //change string to number
     {
         $convert = $this->convert;
         $returnedValue = $this->returnedValue;
@@ -93,12 +90,13 @@ class PhoneKeyboardConverter
     }
 }
 
-$newSting = "Ela nie ma kota";
-$newSting2 = "5,2,22,555,33,222,9999,66,444,55";
+$newSting = "Ela nie ma kotka ";
+$newSting2 = "5,2,22,555,33,22,9999,66,44,55";
 
 $test = new PhoneKeyboardConverter();
 echo $test->getValue($newSting) . "<br>";
 echo $test->getValue($newSting2);
+
 
 
 
