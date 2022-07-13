@@ -1,17 +1,24 @@
-function welcomeUsers(fullArray) {
-  for (n = 0; fullArray.length > n; n++) {
-    let zmienna = fullArray[n];
-    if (zmienna.salary >= 15000) {
-      console.log("Witaj, prezesie!");
-    } else if (zmienna.salary < 5000) {
-      console.log(zmienna.username + ", szykuj się na podwyżkę!");
-    } else if (zmienna.birthYear % 2 == 0) {
-      let ageUser = new Date().getFullYear() - zmienna.birthYear;
-      console.log(`Witaj, ${zmienna.username}! W tym roku kończysz ${ageUser} lat!`
-      );
-    } else if (zmienna.birthYear % 2 == 1) {
-        console.log(`${zmienna.username}, jesteś zwolniony! `)
-    } else {
+function welcomeUsers(fullArray) { // takes an array of objects and divides them on the basis of the received data
+  if (Array.isArray(fullArray)) {
+    for (n = 0; fullArray.length > n; n++) {
+      let zmienna = fullArray[n];
+      if (
+        !(typeof zmienna.username === "string") ||
+        !(typeof zmienna.birthYear === "number") ||
+        !(typeof zmienna.salary === "number")
+      ) {
+        console.log("error");
+      } else if (zmienna.salary >= 15000) {
+        console.log("Witaj, prezesie!");
+      } else if (zmienna.salary < 5000) {
+        console.log(zmienna.username + ", szykuj się na podwyżkę!");
+      } else if (zmienna.birthYear % 2 == 0) {
+        let ageUser = new Date().getFullYear() - zmienna.birthYear;
+        console.log(`Witaj, ${zmienna.username}! W tym roku kończysz ${ageUser} lat!` );
+      } else if (zmienna.birthYear % 2 == 1) {
+        console.log(`${zmienna.username}, jesteś zwolniony! `);
+      } else {
+      }
     }
   }
 }

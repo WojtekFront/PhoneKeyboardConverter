@@ -2,10 +2,10 @@
 
 class PhoneKeyboardConverter
 {
-    function __construct($enteredValue)
-    {
-        $this->enteredValue = $enteredValue;
-    }
+    // function __construct($enteredValue)
+    // {
+    //     $this->enteredValue = $enteredValue;
+    // }
     public $convert = [
         "a" => "2", "b" => "22", "c" => "222",
         "d" => "3", "e" => "33", "f" => "333",
@@ -20,7 +20,7 @@ class PhoneKeyboardConverter
 
     public $returnedValue = "";
 
-    public function getValue($enteredValue)
+    public function getValue($enteredValue) // takes the external data and starts the analysis
     {
 
         if (!isset($enteredValue) || !$enteredValue) { //check exist or not empty
@@ -34,39 +34,38 @@ class PhoneKeyboardConverter
         //     $this->verificationIntiger($enteredValue);
         // }
         else { // "invalid value"
-            header("location:../index.php?error=invalidValue");
-            exit();
+            return "niepoprawne dane";
         }
     }
 
     function verificationFirstCharacter($enternedArray) // here we check the first character in the array
-    { 
+    {
         $firstCharacter = substr($enternedArray, 0, 1);
         return $this->assignToArray($firstCharacter, $enternedArray);
     }
 
-    function assignToArray($firstCharacterNew, $enternedArray)
+    function assignToArray($firstCharacterNew, $enternedArray) // based on the first character assigns to an array
     {
         if (is_numeric($firstCharacterNew)) {
             $numericValue = $this->convertToString($enternedArray);
             return $numericValue;
         } elseif (preg_match("/[a-zA-Z\s]/", $firstCharacterNew)) {
             $stringValue = $this->convertToNumeric($enternedArray);
-            return $stringValue;      
+            return $stringValue;
         } else {
             return "niepoprawna wartość";
         }
     }
 
-    function convertToString($enternedArray) //change number na string
+    function convertToString($enternedArray) //change number on string
     {
-        $convert =$this-> convert; 
-        $returnedValue =$this-> returnedValue;
+        $convert = $this->convert;
+        $returnedValue = $this->returnedValue;
         $enternedArray = explode(",", $enternedArray);
         for ($n = 0; count($enternedArray) > $n; $n++) {
-            if(!is_numeric($enternedArray[$n])){
-                $enternedArray[$n] ="error";
-                           }
+            if (!is_numeric($enternedArray[$n])) {
+                $enternedArray[$n] = "error";
+            }
             foreach ($convert as $keyEnternedArrayWord => $enternedArrayWord) {
                 if ($enternedArrayWord == $enternedArray[$n]) {
                     $returnedValue = $returnedValue . $keyEnternedArrayWord;
@@ -77,16 +76,16 @@ class PhoneKeyboardConverter
     }
 
     function convertToNumeric($enternedArray) //change string to number
-    { 
-        $convert =$this-> convert; 
-        $returnedValue =$this-> returnedValue;
+    {
+        $convert = $this->convert;
+        $returnedValue = $this->returnedValue;
         $enternedArray = str_split(strtolower($enternedArray));
         for ($n = 0; (count($enternedArray)) > $n; $n++) {
             if ($returnedValue != "") {
                 $returnedValue = $returnedValue . ",";
             }
-            if(!preg_match("/[a-zA-Z\s]/", $enternedArray[$n])){
- $enternedArray[$n] ="error";
+            if (!preg_match("/[a-zA-Z\s]/", $enternedArray[$n])) {
+                $enternedArray[$n] = "error";
             }
             $returnedValue = $returnedValue . $convert[$enternedArray[$n]];
         }
@@ -94,9 +93,12 @@ class PhoneKeyboardConverter
     }
 }
 
-$newSting = "22,22";
-$test = new PhoneKeyboardConverter($newSting);
-echo $test-> getValue($newSting);
+$newSting = "Ela nie ma kota";
+$newSting2 = "5,2,22,555,33,222,9999,66,444,55";
+
+$test = new PhoneKeyboardConverter();
+echo $test->getValue($newSting) . "<br>";
+echo $test->getValue($newSting2);
 
 
 
